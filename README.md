@@ -53,14 +53,21 @@ c298559fc8ae: Pull complete
 1c93d6585dd1: Pull complete
 Digest: sha256:8bed724d571307e245a27ac50ba0b0ee2119b5ba7b57109fbddfbb5466679241
 Status: Downloaded newer image for ailispaw/ubuntu-essential:14.04
-[bargee@barge ~]$ analyze-local-images ailispaw/ubuntu-essential:14.04
-2016-08-21 23:55:24.819400 I | Saving ailispaw/ubuntu-essential:14.04 to local disk (this may take some time)
-2016-08-21 23:55:26.157028 I | Retrieving image history
-2016-08-21 23:55:26.187394 I | Analyzing 2 layers...
-2016-08-21 23:55:26.187575 I | Analyzing c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
-2016-08-21 23:55:26.201054 I | Analyzing 1c93d6585dd188283a8706f1df22d662cdf7a49700286a582f453e2a24715eba
-2016-08-21 23:55:26.206267 I | Retrieving image's vulnerabilities
-Clair report for image ailispaw/ubuntu-essential:14.04 (2016-08-21 23:55:26.275722184 +0000 UTC)
+[bargee@barge ~]$ analyze-local-images -minimum-severity Medium ailispaw/ubuntu-essential:14.04
+2016-08-22 02:27:10.048230 I | Saving ailispaw/ubuntu-essential:14.04 to local disk (this may take some time)
+2016-08-22 02:27:14.070162 I | Retrieving image history
+2016-08-22 02:27:14.103607 I | Analyzing 2 layers...
+2016-08-22 02:27:14.103791 I | Analyzing c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
+2016-08-22 02:27:14.114818 I | Analyzing 1c93d6585dd188283a8706f1df22d662cdf7a49700286a582f453e2a24715eba
+2016-08-22 02:27:14.117480 I | Retrieving image's vulnerabilities
+Clair report for image ailispaw/ubuntu-essential:14.04 (2016-08-22 02:27:14.14364884 +0000 UTC)
+CVE-2016-2781 (Medium)
+        nonpriv session can escape to the parent session by using the TIOCSTI ioctl
+
+        Package:       coreutils @ 8.21-1ubuntu5.4
+        Link:          http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-2781
+        Layer:         c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
+
 CVE-2016-1238 (Medium)
         (1) cpan/Archive-Tar/bin/ptar, (2) cpan/Archive-Tar/bin/ptardiff,
         (3) cpan/Archive-Tar/bin/ptargrep, (4) cpan/CPAN/scripts/cpan,
@@ -82,14 +89,5 @@ CVE-2016-1238 (Medium)
         Link:          http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-1238
         Layer:         c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
 
-CVE-2016-2781 (Medium)
-        nonpriv session can escape to the parent session by using the TIOCSTI ioctl
 
-        Package:       coreutils @ 8.21-1ubuntu5.4
-        Link:          http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-2781
-        Layer:         c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
-
-.
-.
-.
 ```
