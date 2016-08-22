@@ -28,7 +28,8 @@ You can check the status by using `docker logs clair` and you will see `updater:
 ```bash
 $ docker logs clair
 2016-08-21 23:40:28.804803 I | pgsql: running database migrations
-goose: no migrations to run. current version: 20151222113213
+goose: migrating db environment '', current version: 0, target: 20151222113213
+OK    20151222113213_Initial.sql
 2016-08-21 23:40:29.101777 I | pgsql: database migration ran successfully
 2016-08-21 23:40:29.114150 I | notifier: notifier service is disabled
 2016-08-21 23:40:29.114338 I | api: starting main API on port 6060.
@@ -88,6 +89,5 @@ CVE-2016-1238 (Medium)
         Package:       perl @ 5.18.2-2ubuntu1.1
         Link:          http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-1238
         Layer:         c298559fc8ae67275ae2d0d36cfbc3a2960b15440d6dcedbec13d0174ace4e1d
-
 
 ```
