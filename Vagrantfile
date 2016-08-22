@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
       args: [
         "-p 6060-6061:6060-6061",
         "-v /vagrant/config:/config",
-        "-v /opt/tmp:/tmp",
+        "-v /opt/tmp:/opt/tmp",
         "--link postgres:postgres"
       ].join(" "),
       cmd: "-config=/config/config.yaml",
