@@ -8,8 +8,6 @@ module VagrantPlugins
   end
 end
 
-PWD=Dir.pwd
-
 GO_VERSION = "1.7"
 
 Vagrant.configure(2) do |config|
@@ -26,13 +24,16 @@ Vagrant.configure(2) do |config|
     sh.inline = <<-EOT
       pkg install bindfs
 
-      if mountpoint -q '/vagrant' && ! mountpoint -q '#{PWD}/data'; then
-        mkdir -p '/vagrant/data'
-        mkdir -p '#{PWD}/data'
+      if mountpoint -q /vagrant && ! mountpoint -q /opt/data; then
+        mkdir -p /vagrant/data
+        mkdir -p /opt/data
         _UID=$(ls -ld /vagrant | awk '{print $3}')
         _GID=$(ls -ld /vagrant | awk '{print $4}')
-        bindfs --map=${_UID}/999:@${_GID}/@999 '/vagrant/data' '#{PWD}/data'
+        bindfs --map=${_UID}/999:@${_GID}/@999 /vagrant/data /opt/data
       fi
+
+      mkdir -p /opt/tmp
+      chmod a+w /opt/tmp
     EOT
   end
 
@@ -51,7 +52,7 @@ Vagrant.configure(2) do |config|
       image: "postgres:9.5",
       args: [
         "-e POSTGRES_PASSWORD=test",
-        "-v #{PWD}/data:/var/lib/postgresql/data"
+        "-v /opt/data:/var/lib/postgresql/data"
       ].join(" "),
       restart: false
   end
@@ -63,7 +64,7 @@ Vagrant.configure(2) do |config|
       args: [
         "-p 6060-6061:6060-6061",
         "-v /vagrant/config:/config",
-        "-v /tmp:/tmp",
+        "-v /opt/tmp:/tmp",
         "--link postgres:postgres"
       ].join(" "),
       cmd: "-config=/config/config.yaml",
@@ -80,6 +81,7 @@ Vagrant.configure(2) do |config|
         echo "export GOROOT=/opt/go" >> ~/.bash_profile
         echo "export GOPATH=\\$HOME/go" >> ~/.bash_profile
         echo "export PATH=$PATH:\\$GOROOT/bin:\\$GOPATH/bin" >> ~/.bash_profile
+        echo "export TMPDIR=/opt/tmp" >> ~/.bash_profile
         source ~/.bash_profile
       fi
 
